@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rental Storage Unit | Premium Demo</title>
+  <meta name="description" content="Premium rental storage unit demo with cinematic scroll animations and booking.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container nav-wrap">
+      <a class="brand" href="#top">VaultLine</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">Menu</button>
+      <nav class="site-nav" id="siteNav">
+        <a href="#hero">Home</a>
+        <a href="#story">Story</a>
+        <a href="#units">Units</a>
+        <a href="#zoom">Interior</a>
+        <a href="#booking">Book</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-media" data-parallax data-speed="0.18"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content container">
+        <p class="eyebrow reveal">Premium Urban Storage</p>
+        <h1 class="hero-title reveal">Secure Storage. Simplified.</h1>
+        <p class="hero-sub reveal">A high-security storage experience with transparent pricing and instant booking.</p>
+        <div class="hero-actions reveal">
+          <a href="#booking" class="btn btn-solid">Book a Unit</a>
+          <a href="#units" class="btn btn-outline">Explore Units</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="story" id="story">
+      <div class="story-bg" data-parallax data-speed="0.3"></div>
+      <div class="story-overlay"></div>
+      <div class="story-sticky">
+        <div class="story-track container">
+          <h2 class="story-title reveal">Engineered for Peace of Mind</h2>
+          <p class="story-line reveal-step" data-step="0">24/7 Security</p>
+          <p class="story-line reveal-step" data-step="1">Flexible Plans</p>
+          <p class="story-line reveal-step" data-step="2">Accessible Anytime</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="units section-pad" id="units">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Storage Units</p>
+          <h2>Find The Perfect Fit</h2>
+        </div>
+
+        <div class="units-grid">
+          <article class="unit-card reveal" data-unit-name="Small (5x5)" data-unit-price="90">
+            <div class="unit-image" style="background-image:url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="unit-body">
+              <h3>Small</h3>
+              <p class="meta">5 x 5 ft</p>
+              <p class="price">$90 <span>/ month</span></p>
+              <p class="desc">Perfect for boxes, archive files, and compact personal items.</p>
+              <button class="btn btn-solid unit-book-btn">Book Now</button>
+            </div>
+          </article>
+
+          <article class="unit-card reveal" data-unit-name="Medium (10x10)" data-unit-price="170">
+            <div class="unit-image" style="background-image:url('https://images.unsplash.com/photo-1595079676339-1534801ad6cf?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="unit-body">
+              <h3>Medium</h3>
+              <p class="meta">10 x 10 ft</p>
+              <p class="price">$170 <span>/ month</span></p>
+              <p class="desc">Ideal for one-bedroom furniture sets and growing business stock.</p>
+              <button class="btn btn-solid unit-book-btn">Book Now</button>
+            </div>
+          </article>
+
+          <article class="unit-card reveal" data-unit-name="Large (10x20)" data-unit-price="290">
+            <div class="unit-image" style="background-image:url('https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="unit-body">
+              <h3>Large</h3>
+              <p class="meta">10 x 20 ft</p>
+              <p class="price">$290 <span>/ month</span></p>
+              <p class="desc">Built for full-home relocation storage and heavy commercial inventory.</p>
+              <button class="btn btn-solid unit-book-btn">Book Now</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="zoom-showcase" id="zoom">
+      <div class="zoom-media" data-zoom></div>
+      <div class="zoom-overlay"></div>
+      <div class="zoom-content container reveal">
+        <p class="eyebrow">Interior View</p>
+        <h2>Clean, Climate-Conscious, and Professionally Maintained</h2>
+      </div>
+    </section>
+
+    <section class="booking section-pad" id="booking">
+      <div class="container booking-layout">
+        <div class="booking-copy reveal">
+          <p class="eyebrow">Book Now</p>
+          <h2>Reserve Your Storage Unit In Minutes</h2>
+          <p>Choose a unit, select duration, and receive instant confirmation on-screen.</p>
+        </div>
+
+        <div class="booking-card reveal">
+          <form id="bookingForm" novalidate>
+            <label>
+              Name
+              <input type="text" name="name" required placeholder="Your full name">
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" required placeholder="you@example.com">
+            </label>
+            <label>
+              Phone Number
+              <input type="tel" name="phone" required placeholder="+254 700 000 000">
+            </label>
+            <label>
+              Storage Unit
+              <select name="unit" id="unitSelect" required>
+                <option value="">Select a unit</option>
+                <option value="Small (5x5)" data-price="90">Small (5x5) - $90/month</option>
+                <option value="Medium (10x10)" data-price="170">Medium (10x10) - $170/month</option>
+                <option value="Large (10x20)" data-price="290">Large (10x20) - $290/month</option>
+              </select>
+            </label>
+            <label>
+              Duration (months)
+              <input type="number" name="duration" min="1" max="36" required placeholder="e.g. 3">
+            </label>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-solid">Confirm Booking</button>
+              <button type="button" id="viewBookingsBtn" class="btn btn-outline">View Saved Bookings</button>
+            </div>
+            <p id="formMessage" class="form-message" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+
+      <div class="container dashboard reveal" id="dashboard">
+        <div class="dashboard-head">
+          <h3>Saved Bookings</h3>
+          <button id="clearBookingsBtn" class="btn btn-outline">Clear All</button>
+        </div>
+        <div class="booking-list" id="bookingList"></div>
+        <p id="emptyState" class="empty-state">No bookings yet. Submit the form above to create one.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>Rental Storage Unit Demo · Cinematic Frontend MVP</p>
+      <a href="#top" class="footer-link">Back to Top</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
