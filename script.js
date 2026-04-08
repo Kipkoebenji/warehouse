@@ -18,6 +18,16 @@ const parallaxLayers = document.querySelectorAll("[data-parallax]");
 const zoomLayer = document.querySelector("[data-zoom]");
 const heroLayer = document.querySelector(".hero-media");
 
+function syncMenuState() {
+  if (!menuToggle || !siteNav) return;
+
+  const isDesktop = window.matchMedia("(min-width: 900px)").matches;
+  if (isDesktop) {
+    siteNav.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+  }
+}
+
 function getBookings() {
   try {
     return JSON.parse(localStorage.getItem(BOOKING_KEY)) || [];
@@ -84,8 +94,8 @@ const revealObserver = new IntersectionObserver(
   },
   {
     threshold: 0.16,
-    rootMargin: "0px 0px -8% 0px"
-  }
+    rootMargin: "0px 0px -8% 0px",
+  },
 );
 
 revealElements.forEach((el) => revealObserver.observe(el));
@@ -113,7 +123,10 @@ function animateOnScroll() {
   if (zoomLayer) {
     const section = zoomLayer.parentElement;
     const rect = section.getBoundingClientRect();
-    const sectionProgress = Math.min(Math.max((viewportHeight - rect.top) / (viewportHeight + rect.height), 0), 1);
+    const sectionProgress = Math.min(
+      Math.max((viewportHeight - rect.top) / (viewportHeight + rect.height), 0),
+      1,
+    );
     const zoomScale = 1 + sectionProgress * 0.24;
     zoomLayer.style.transform = `scale(${zoomScale})`;
   }
@@ -121,8 +134,12 @@ function animateOnScroll() {
   if (storySection) {
     const rect = storySection.getBoundingClientRect();
     const total = storySection.offsetHeight - viewportHeight;
-    const progress = total > 0 ? Math.min(Math.max(-rect.top / total, 0), 1) : 0;
-    const activeIndex = Math.min(storySteps.length - 1, Math.floor(progress * storySteps.length));
+    const progress =
+      total > 0 ? Math.min(Math.max(-rect.top / total, 0), 1) : 0;
+    const activeIndex = Math.min(
+      storySteps.length - 1,
+      Math.floor(progress * storySteps.length),
+    );
 
     storySteps.forEach((step, idx) => {
       step.classList.toggle("active", idx === activeIndex);
@@ -132,12 +149,16 @@ function animateOnScroll() {
   ticking = false;
 }
 
-window.addEventListener("scroll", () => {
-  if (!ticking) {
-    window.requestAnimationFrame(animateOnScroll);
-    ticking = true;
-  }
-}, { passive: true });
+window.addEventListener(
+  "scroll",
+  () => {
+    if (!ticking) {
+      window.requestAnimationFrame(animateOnScroll);
+      ticking = true;
+    }
+  },
+  { passive: true },
+);
 
 window.addEventListener("resize", animateOnScroll);
 
@@ -181,7 +202,7 @@ bookingForm.addEventListener("submit", (event) => {
     duration,
     pricePerMonth: monthly,
     totalPrice: monthly * duration,
-    bookedOn: new Date().toLocaleString()
+    bookedOn: new Date().toLocaleString(),
   };
 
   const existing = getBookings();
@@ -190,13 +211,20 @@ bookingForm.addEventListener("submit", (event) => {
 
   renderBookings();
   bookingForm.reset();
-  setFormMessage("Booking confirmed. Your storage unit has been reserved.", "success");
+  setFormMessage(
+    "Booking confirmed. Your storage unit has been reserved.",
+    "success",
+  );
 
-  document.getElementById("dashboard").scrollIntoView({ behavior: "smooth", block: "start" });
+  document
+    .getElementById("dashboard")
+    .scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
 viewBookingsBtn.addEventListener("click", () => {
-  document.getElementById("dashboard").scrollIntoView({ behavior: "smooth", block: "start" });
+  document
+    .getElementById("dashboard")
+    .scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
 clearBookingsBtn.addEventListener("click", () => {
@@ -206,14 +234,19 @@ clearBookingsBtn.addEventListener("click", () => {
 });
 
 menuToggle.addEventListener("click", () => {
-  siteNav.classList.toggle("open");
+  const isOpen = siteNav.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
 });
 
-document.querySelectorAll('.site-nav a').forEach((link) => {
+document.querySelectorAll(".site-nav a").forEach((link) => {
   link.addEventListener("click", () => {
     siteNav.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
   });
 });
 
+window.addEventListener("resize", syncMenuState);
+
 renderBookings();
 animateOnScroll();
+syncMenuState();
